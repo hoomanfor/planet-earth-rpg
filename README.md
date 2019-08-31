@@ -1,1 +1,1 @@
-# planet-earth-rpg-game
+# planet-earth-rpg
