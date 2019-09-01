@@ -10,7 +10,7 @@ h1 {
     font-size: 20px; 
 }
 
-.characters {
+.characters-js {
     border: 1px solid black; 
     /* display: inline-block;  */
     float: left; 

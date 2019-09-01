@@ -36,20 +36,44 @@ var characters = [
 ];
 
 
-for (var i = 0; i < characters.length; i++) {
     var characterDiv = $("<div>");
-    characterDiv.attr("class", "characters");
+    characterDiv.attr("class", "characters-js");
+    characterDiv.attr("id", characters[0].title)
+    var characterId = "#" + characters[0].title
     $("#characters-js").append(characterDiv);
     var titleP = $("<p>");
-    titleP.text(characters[i].title);
-    $(".characters").append(titleP)
-    // var characterImg = $("<img>");
-    // characterImg.attr("src", characters.image_url);
-    // characterImg.attr("width", "150px");
-    // characterImg.attr("height", "100px");
-    // var healthP = $("<p>");
-    // healthP.text(characters[i].health);
-}
+    titleP.text(characters[0].title);
+    $(characterId).append(titleP)
+    var characterImg = $("<img>");
+    characterImg.attr("src", characters[0].image_url);
+    characterImg.attr("width", "150px");
+    characterImg.attr("height", "125px");
+    $(characterId).append(characterImg);
+    var healthP = $("<p>");
+    healthP.text(characters[0].health);
+    $(characterId).append(healthP);
+
+    // characterDiv = "";
+    // titleP = "";
+    // healthP = "";
+
+    var characterDiv = $("<div>");
+    characterDiv.attr("class", "characters-js");
+    characterDiv.attr("id", characters[1].title)
+    var characterId = "#" + characters[1].title
+    $("#characters-js").append(characterDiv);
+    var titleP = $("<p>");
+    titleP.text(characters[1].title);
+    $(characterId).append(titleP)
+    var characterImg = $("<img>");
+    characterImg.attr("src", characters[1].image_url);
+    characterImg.attr("width", "151px");
+    characterImg.attr("height", "125px");
+    $(characterId).append(characterImg);
+    var healthP = $("<p>");
+    healthP.text(characters[1].health);
+    $(characterId).append(healthP);
+
 
 
 });
