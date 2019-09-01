@@ -8,12 +8,17 @@ body {
 
 h1 {
     font-size: 20px; 
+    clear:both; 
 }
 
-.characters-js {
+.characters {
     border: 1px solid black; 
     /* display: inline-block;  */
     float: left; 
     padding: 5px 15px; 
     text-align: center; 
+}
+
+.bg-color {
+    background-color: green;
 }

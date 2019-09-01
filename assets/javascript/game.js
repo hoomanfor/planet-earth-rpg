@@ -35,26 +35,50 @@ var characters = [
     }
 ];
 
-    for (var i = 0; i < characters.length; i++) {
-        var characterDiv = $("<div>");
-        characterDiv.attr("class", "characters-js");
-        characterDiv.attr("id", characters[i].title)
-        var characterId = "#" + characters[i].title
-        $("#characters-js").append(characterDiv);
-        var titleP = $("<p>");
-        titleP.text(characters[i].title);
-        $(characterId).append(titleP)
-        var characterImg = $("<img>");
-        characterImg.attr("src", characters[i].image_url);
-        characterImg.attr("width", "150px");
-        characterImg.attr("height", "125px");
-        $(characterId).append(characterImg);
-        var healthP = $("<p>");
-        healthP.text(characters[i].health);
-        $(characterId).append(healthP);
-}
 
+        // for (var i = 0; i < characters.length; i++) {
+        //     var characterDiv = $("<div>");
+        //     characterDiv.attr("class", "characters");
+        //     characterDiv.attr("id", characters[i].title)
+        //     var characterId = "#" + characters[i].title
+        //     $("#characters").append(characterDiv);
+        //     var titleP = $("<p>");
+        //     titleP.text(characters[i].title);
+        //     $(characterId).append(titleP)
+        //     var characterImg = $("<img>");
+        //     characterImg.attr("src", characters[i].image_url);
+        //     characterImg.attr("width", "150px");
+        //     characterImg.attr("height", "125px");
+        //     $(characterId).append(characterImg);
+        //     var healthP = $("<p>");
+        //     healthP.text(characters[i].health);
+        //     $(characterId).append(healthP);
+        // }
+        
+        // $("#characters").on("click", function () {
+        //     console.log($(this).attr())
+        // });
 
+    var koalaImg = $("<img>");
+    koalaImg.attr("src", characters[0].image_url)
+    $("#characters").append(koalaImg);
+    var foxImg = $("<img>");
+    foxImg.attr("src", characters[1].image_url)
+    $("#characters").append(foxImg);
+    var goatImg = $("<img>");
+    goatImg.attr("src", characters[2].image_url)
+    $("#characters").append(goatImg);
+    var davidImg = $("<img>");
+    davidImg.attr("src", characters[3].image_url)
+    $("#characters").append(davidImg);
+
+    $("img").on("click", function () {
+        var newImgSrc = $(this).attr("src");
+        var meImg = $("<img>");
+        meImg.attr("src", newImgSrc);
+        $("#me").append(meImg);
+        $(this).attr("src", "")
+    })
 
 });
 
