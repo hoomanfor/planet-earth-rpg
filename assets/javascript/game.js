@@ -39,9 +39,7 @@ var characters = [
     var opponentIndex;
     var userCurrentHealth = 0;
     var userAttack = 0;
-    var userCounter = 0;
     var opponentCurrentHealth = 0;
-    var opponentAttack = 0;
     var opponentCounter = 0;
     var initialized = false;
 
@@ -105,32 +103,32 @@ var characters = [
 
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
+        opponentIndex = parseInt($(this).attr("index"));
         if (koalaImg.attr("opponent") === "true") {
-            koalaImg.attr("class", "enemy");
-            opponentIndex = 0;
+            koalaImg.attr("class", "opponent");
             $("#opponent").append(koalaImg);
+            koalaImg.attr("opponent", "false")
         } 
         if (foxImg.attr("opponent") === "true") {
-            foxImg.attr("class", "enemy");
-            opponentIndex = 1;
+            foxImg.attr("class", "opponent");
             $("#opponent").append(foxImg);
+            foxImg.attr("opponent", "false")
         } 
         if (goatImg.attr("opponent") === "true") {
-            goatImg.attr("class", "enemy");
-            opponentIndex = 2;
+            goatImg.attr("class", "opponent");
             $("#opponent").append(goatImg);
+            goatImg.attr("opponent", "false")
         } 
         if (davidImg.attr("opponent") === "true") {
-            davidImg.attr("class", "enemy");
-            opponentIndex = 3;
+            davidImg.attr("class", "opponent");
             $("#opponent").append(davidImg);
+            davidImg.attr("opponent", "false")
         } 
     });
 
     $("button").click(function() {
         console.log("userIndex: " , userIndex);
         console.log("opponentIndex: ", opponentIndex);
-        // userCurrentHealth = characters[userIndex].health;
         if (!initialized) {
             userCurrentHealth = characters[userIndex].health;
             userAttack = characters[userIndex].attack; 
@@ -142,8 +140,12 @@ var characters = [
         opponentCurrentHealth = opponentCurrentHealth - userAttack; 
         console.log("userAttack(pre-power-up): ", userAttack);
         userAttack = userAttack + characters[userIndex].attack
-
         initialized = true; 
+        if (opponentCurrentHealth <= 0) {
+            $(".opponent").remove();
+            initialized = false; 
+        }
+        
         console.log("userCurrentHealth: ", userCurrentHealth);
         console.log("opponentCurrentHealth: ", opponentCurrentHealth);
         console.log("userAttack(post-power-up): ", userAttack);
