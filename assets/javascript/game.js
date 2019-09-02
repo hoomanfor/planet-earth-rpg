@@ -59,26 +59,61 @@ var characters = [
         //     console.log($(this).attr())
         // });
 
+    var characterIndex = [];
+
+    // write a conditional statement for each img to test data-state: true/false
+
     var koalaImg = $("<img>");
-    koalaImg.attr("src", characters[0].image_url)
+    koalaImg.attr("src", characters[0].image_url);
+    koalaImg.attr("alive", "true");
+    koalaImg.attr("enemy", "true");
+    koalaImg.attr("index", "0");
     $("#characters").append(koalaImg);
     var foxImg = $("<img>");
-    foxImg.attr("src", characters[1].image_url)
+    foxImg.attr("src", characters[1].image_url);
+    foxImg.attr("alive", "true");
+    foxImg.attr("enemy", "true");
+    foxImg.attr("index", "1");
     $("#characters").append(foxImg);
     var goatImg = $("<img>");
-    goatImg.attr("src", characters[2].image_url)
+    goatImg.attr("src", characters[2].image_url);
+    goatImg.attr("alive", "true");
+    goatImg.attr("enemy", "true");
+    goatImg.attr("index", "2");
     $("#characters").append(goatImg);
     var davidImg = $("<img>");
-    davidImg.attr("src", characters[3].image_url)
+    davidImg.attr("src", characters[3].image_url);
+    davidImg.attr("alive", "true");
+    davidImg.attr("enemy", "true");
+    davidImg.attr("index", "3");
     $("#characters").append(davidImg);
 
     $("img").on("click", function () {
-        var newImgSrc = $(this).attr("src");
-        var meImg = $("<img>");
-        meImg.attr("src", newImgSrc);
-        $("#me").append(meImg);
-        $(this).attr("src", "")
+        $("#characters").empty();
+        $(this).attr("enemy", "false");
+        $("#me").append(this);
+            if (koalaImg.attr("enemy") === "true") {
+                $("#enemies").append(koalaImg);
+            } 
+            if (foxImg.attr("enemy") === "true") {
+                $("#enemies").append(foxImg);
+            } 
+            if (goatImg.attr("enemy") === "true") {
+                $("#enemies").append(goatImg);
+            } 
+            if (davidImg.attr("enemy") === "true") {
+                $("#enemies").append(davidImg);
+            } 
+        // var newImgSrc = $(this).attr("src");
+        // var meImg = $("<img>");
+        // meImg.attr("src", newImgSrc);
+        // $("#me").append(meImg);
+        // $(this).attr("src", "");
     })
+
+    for (var key in characters) {
+        console.log(characters[key].title);
+    }
 
 });
 
