@@ -22,3 +22,7 @@ h1 {
 .bg-color {
     background-color: green;
 }
+
+button {
+    font-size: 16px; 
+}

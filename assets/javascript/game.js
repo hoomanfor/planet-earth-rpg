@@ -34,33 +34,21 @@ var characters = [
         image_url: "assets/images/david.jpg"
     }
 ];
-
-
-        // for (var i = 0; i < characters.length; i++) {
-        //     var characterDiv = $("<div>");
-        //     characterDiv.attr("class", "characters");
-        //     characterDiv.attr("id", characters[i].title)
-        //     var characterId = "#" + characters[i].title
-        //     $("#characters").append(characterDiv);
-        //     var titleP = $("<p>");
-        //     titleP.text(characters[i].title);
-        //     $(characterId).append(titleP)
-        //     var characterImg = $("<img>");
-        //     characterImg.attr("src", characters[i].image_url);
-        //     characterImg.attr("width", "150px");
-        //     characterImg.attr("height", "125px");
-        //     $(characterId).append(characterImg);
-        //     var healthP = $("<p>");
-        //     healthP.text(characters[i].health);
-        //     $(characterId).append(healthP);
-        // }
         
-        // $("#characters").on("click", function () {
-        //     console.log($(this).attr())
-        // });
+    var userIndex = "";
+    var opponentIndex;
+    var userCurrentHealth = 0;
+    var userAttack = 0;
+    var userCounter = 0;
+    var opponentCurrentHealth = 0;
+    var opponentAttack = 0;
+    var opponentCounter = 0;
+    var initialized = false;
+
 
     var koalaImg = $("<img>");
     koalaImg.attr("src", characters[0].image_url);
+    koalaImg.attr("class", "unchosen")
     koalaImg.attr("alive", "true");
     koalaImg.attr("enemy", "true");
     koalaImg.attr("opponent", "false");
@@ -68,6 +56,7 @@ var characters = [
     $("#characters").append(koalaImg);
     var foxImg = $("<img>");
     foxImg.attr("src", characters[1].image_url);
+    foxImg.attr("class", "unchosen")
     foxImg.attr("alive", "true");
     foxImg.attr("enemy", "true");
     foxImg.attr("opponent", "false");
@@ -75,6 +64,7 @@ var characters = [
     $("#characters").append(foxImg);
     var goatImg = $("<img>");
     goatImg.attr("src", characters[2].image_url);
+    goatImg.attr("class", "unchosen")
     goatImg.attr("alive", "true");
     goatImg.attr("enemy", "true");
     goatImg.attr("opponent", "false");
@@ -82,15 +72,18 @@ var characters = [
     $("#characters").append(goatImg);
     var davidImg = $("<img>");
     davidImg.attr("src", characters[3].image_url);
+    davidImg.attr("class", "unchosen")
     davidImg.attr("alive", "true");
     davidImg.attr("enemy", "true");
     davidImg.attr("opponent", "false");
     davidImg.attr("index", "3");
     $("#characters").append(davidImg);
 
-    $("img").on("click", function () {
-        $("#characters").empty();
+    $(".unchosen").on("click", function() {
         $(this).attr("enemy", "false");
+        if (userIndex === "") {
+            userIndex = parseInt($(this).attr("index"));
+        }
         $("#me").append(this);
             if (koalaImg.attr("enemy") === "true") {
                 koalaImg.attr("class", "enemy");
@@ -110,24 +103,53 @@ var characters = [
             } 
     });
 
-    $(document).on("click", ".enemy", function () {
+    $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
         if (koalaImg.attr("opponent") === "true") {
+            koalaImg.attr("class", "enemy");
+            opponentIndex = 0;
             $("#opponent").append(koalaImg);
         } 
         if (foxImg.attr("opponent") === "true") {
             foxImg.attr("class", "enemy");
+            opponentIndex = 1;
             $("#opponent").append(foxImg);
         } 
         if (goatImg.attr("opponent") === "true") {
             goatImg.attr("class", "enemy");
+            opponentIndex = 2;
             $("#opponent").append(goatImg);
         } 
         if (davidImg.attr("opponent") === "true") {
             davidImg.attr("class", "enemy");
+            opponentIndex = 3;
             $("#opponent").append(davidImg);
         } 
     });
+
+    $("button").click(function() {
+        console.log("userIndex: " , userIndex);
+        console.log("opponentIndex: ", opponentIndex);
+        // userCurrentHealth = characters[userIndex].health;
+        if (!initialized) {
+            userCurrentHealth = characters[userIndex].health;
+            userAttack = characters[userIndex].attack; 
+            opponentCurrentHealth = characters[opponentIndex].health;
+            opponentCounter = characters[opponentIndex].counter
+
+        }
+        userCurrentHealth = userCurrentHealth - opponentCounter;
+        opponentCurrentHealth = opponentCurrentHealth - userAttack; 
+        console.log("userAttack(pre-power-up): ", userAttack);
+        userAttack = userAttack + characters[userIndex].attack
+
+        initialized = true; 
+        console.log("userCurrentHealth: ", userCurrentHealth);
+        console.log("opponentCurrentHealth: ", opponentCurrentHealth);
+        console.log("userAttack(post-power-up): ", userAttack);
+    });
+
+
 
     // for (var key in characters) {
     //     console.log(characters[key].title);
@@ -158,3 +180,22 @@ var characters = [
 // A winning player must pick their characters wisely by first fighting an enemy with low `Counter Attack Power`. This will allow them to grind `Attack Power` and to take on enemies before they lose all of their `Health Points`. Healing options would mess with this dynamic.
 
 // Your players should be able to win and lose the game no matter what character they choose. The challenge should come from picking the right enemies, not choosing the strongest player.
+
+        // for (var i = 0; i < characters.length; i++) {
+        //     var characterDiv = $("<div>");
+        //     characterDiv.attr("class", "characters");
+        //     characterDiv.attr("id", characters[i].title)
+        //     var characterId = "#" + characters[i].title
+        //     $("#characters").append(characterDiv);
+        //     var titleP = $("<p>");
+        //     titleP.text(characters[i].title);
+        //     $(characterId).append(titleP)
+        //     var characterImg = $("<img>");
+        //     characterImg.attr("src", characters[i].image_url);
+        //     characterImg.attr("width", "150px");
+        //     characterImg.attr("height", "125px");
+        //     $(characterId).append(characterImg);
+        //     var healthP = $("<p>");
+        //     healthP.text(characters[i].health);
+        //     $(characterId).append(healthP);
+        // }
