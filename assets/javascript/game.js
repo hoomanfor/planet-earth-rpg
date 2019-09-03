@@ -43,15 +43,36 @@ var characters = [
     var opponentCounter = 0;
     var initialized = false;
 
+    var koalaDiv = $("<div>");
+    koalaDiv.addClass("characters");
+    koalaDiv.addClass("koala");
+    koalaDiv.addClass("unchosen");
+    koalaDiv.attr("alive", "true");
+    koalaDiv.attr("enemy", "true");
+    koalaDiv.attr("opponent", "false");
+    koalaDiv.attr("index", "0");
+    var koalaTitle = $("<p>");
+    koalaTitle.attr("id", "koala-title");
+    var koalaPic = $("<img>");
+    koalaPic.attr("src", characters[0].image_url);
+    var koalaHealth = $("<p>");
+    koalaHealth.attr("id", "koala-health");
+    $("#characters").append(koalaDiv);
+    $(".koala").append(koalaTitle);
+    $("#koala-title").text(characters[0].title);
+    $(".koala").append(koalaPic);
+    $(".koala").append(koalaHealth);
+    $("#koala-health").text(characters[0].health);
 
-    var koalaImg = $("<img>");
-    koalaImg.attr("src", characters[0].image_url);
-    koalaImg.attr("class", "unchosen")
-    koalaImg.attr("alive", "true");
-    koalaImg.attr("enemy", "true");
-    koalaImg.attr("opponent", "false");
-    koalaImg.attr("index", "0");
-    $("#characters").append(koalaImg);
+
+    // var koalaImg = $("<img>");
+    // koalaImg.attr("src", characters[0].image_url);
+    // koalaImg.attr("class", "unchosen")
+    // koalaImg.attr("alive", "true");
+    // koalaImg.attr("enemy", "true");
+    // koalaImg.attr("opponent", "false");
+    // koalaImg.attr("index", "0");
+    // $(".koala").append(koalaImg);
     var foxImg = $("<img>");
     foxImg.attr("src", characters[1].image_url);
     foxImg.attr("class", "unchosen")
