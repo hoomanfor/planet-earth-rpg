@@ -42,6 +42,8 @@ var characters = [
     var opponentCurrentHealth = 0;
     var opponentCounter = 0;
     var initialized = false;
+    var userHealthId;
+    var opponentHealthId;
 
     var koalaDiv = $("<div>");
     koalaDiv.addClass("characters");
@@ -56,13 +58,13 @@ var characters = [
     var koalaPic = $("<img>");
     koalaPic.attr("src", characters[0].image_url);
     var koalaHealth = $("<p>");
-    koalaHealth.attr("id", "koala-health");
+    koalaHealth.attr("id", "health0");
     $("#characters").append(koalaDiv);
     $(".koala").append(koalaTitle);
     $("#koala-title").text(characters[0].title);
     $(".koala").append(koalaPic);
     $(".koala").append(koalaHealth);
-    $("#koala-health").text(characters[0].health);
+    $("#health0").text(characters[0].health);
 
     var foxDiv = $("<div>");
     foxDiv.addClass("characters");
@@ -71,19 +73,19 @@ var characters = [
     foxDiv.attr("alive", "true");
     foxDiv.attr("enemy", "true");
     foxDiv.attr("opponent", "false");
-    foxDiv.attr("index", "0");
+    foxDiv.attr("index", "1");
     var foxTitle = $("<p>");
     foxTitle.attr("id", "fox-title");
     var foxPic = $("<img>");
     foxPic.attr("src", characters[1].image_url);
     var foxHealth = $("<p>");
-    foxHealth.attr("id", "fox-health");
+    foxHealth.attr("id", "health1");
     $("#characters").append(foxDiv);
     $(".fox").append(foxTitle);
     $("#fox-title").text(characters[1].title);
     $(".fox").append(foxPic);
     $(".fox").append(foxHealth);
-    $("#fox-health").text(characters[1].health);
+    $("#health1").text(characters[1].health);
 
     var goatDiv = $("<div>");
     goatDiv.addClass("characters");
@@ -92,19 +94,19 @@ var characters = [
     goatDiv.attr("alive", "true");
     goatDiv.attr("enemy", "true");
     goatDiv.attr("opponent", "false");
-    goatDiv.attr("index", "0");
+    goatDiv.attr("index", "2");
     var goatTitle = $("<p>");
     goatTitle.attr("id", "goat-title");
     var goatPic = $("<img>");
     goatPic.attr("src", characters[2].image_url);
     var goatHealth = $("<p>");
-    goatHealth.attr("id", "goat-health");
+    goatHealth.attr("id", "health2");
     $("#characters").append(goatDiv);
     $(".goat").append(goatTitle);
     $("#goat-title").text(characters[2].title);
     $(".goat").append(goatPic);
     $(".goat").append(goatHealth);
-    $("#goat-health").text(characters[2].health);
+    $("#health2").text(characters[2].health);
 
     var davidDiv = $("<div>");
     davidDiv.addClass("characters");
@@ -113,19 +115,19 @@ var characters = [
     davidDiv.attr("alive", "true");
     davidDiv.attr("enemy", "true");
     davidDiv.attr("opponent", "false");
-    davidDiv.attr("index", "0");
+    davidDiv.attr("index", "3");
     var davidTitle = $("<p>");
     davidTitle.attr("id", "david-title");
     var davidPic = $("<img>");
     davidPic.attr("src", characters[3].image_url);
     var davidHealth = $("<p>");
-    davidHealth.attr("id", "david-health");
+    davidHealth.attr("id", "health3");
     $("#characters").append(davidDiv);
     $(".david").append(davidTitle);
     $("#david-title").text(characters[3].title);
     $(".david").append(davidPic);
     $(".david").append(davidHealth);
-    $("#david-health").text(characters[3].health);
+    $("#health3").text(characters[3].health);
 
     $(".unchosen").on("click", function() {
         $(this).attr("enemy", "false");
@@ -176,9 +178,16 @@ var characters = [
         } 
     });
 
+    //(bug) User's health resets to original health power
     $("button").click(function() {
         console.log("userIndex: " , userIndex);
+        userHealthId = "#health" + userIndex;
+        console.log("userHealthId: ", userHealthId);
+
         console.log("opponentIndex: ", opponentIndex);
+        opponentHealthId = "#health" + opponentIndex;
+        console.log("opponentHealthId: ", opponentHealthId);
+
         if (!initialized) {
             userCurrentHealth = characters[userIndex].health;
             userAttack = characters[userIndex].attack; 
@@ -187,7 +196,9 @@ var characters = [
 
         }
         userCurrentHealth = userCurrentHealth - opponentCounter;
-        opponentCurrentHealth = opponentCurrentHealth - userAttack; 
+            $(userHealthId).text(userCurrentHealth);
+        opponentCurrentHealth = opponentCurrentHealth - userAttack;
+            $(opponentHealthId).text(opponentCurrentHealth);
         console.log("userAttack(pre-power-up): ", userAttack);
         userAttack = userAttack + characters[userIndex].attack
         initialized = true; 
