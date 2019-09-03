@@ -64,39 +64,68 @@ var characters = [
     $(".koala").append(koalaHealth);
     $("#koala-health").text(characters[0].health);
 
+    var foxDiv = $("<div>");
+    foxDiv.addClass("characters");
+    foxDiv.addClass("fox");
+    foxDiv.addClass("unchosen");
+    foxDiv.attr("alive", "true");
+    foxDiv.attr("enemy", "true");
+    foxDiv.attr("opponent", "false");
+    foxDiv.attr("index", "0");
+    var foxTitle = $("<p>");
+    foxTitle.attr("id", "fox-title");
+    var foxPic = $("<img>");
+    foxPic.attr("src", characters[1].image_url);
+    var foxHealth = $("<p>");
+    foxHealth.attr("id", "fox-health");
+    $("#characters").append(foxDiv);
+    $(".fox").append(foxTitle);
+    $("#fox-title").text(characters[1].title);
+    $(".fox").append(foxPic);
+    $(".fox").append(foxHealth);
+    $("#fox-health").text(characters[1].health);
 
-    // var koalaImg = $("<img>");
-    // koalaImg.attr("src", characters[0].image_url);
-    // koalaImg.attr("class", "unchosen")
-    // koalaImg.attr("alive", "true");
-    // koalaImg.attr("enemy", "true");
-    // koalaImg.attr("opponent", "false");
-    // koalaImg.attr("index", "0");
-    // $(".koala").append(koalaImg);
-    var foxImg = $("<img>");
-    foxImg.attr("src", characters[1].image_url);
-    foxImg.attr("class", "unchosen")
-    foxImg.attr("alive", "true");
-    foxImg.attr("enemy", "true");
-    foxImg.attr("opponent", "false");
-    foxImg.attr("index", "1");
-    $("#characters").append(foxImg);
-    var goatImg = $("<img>");
-    goatImg.attr("src", characters[2].image_url);
-    goatImg.attr("class", "unchosen")
-    goatImg.attr("alive", "true");
-    goatImg.attr("enemy", "true");
-    goatImg.attr("opponent", "false");
-    goatImg.attr("index", "2");
-    $("#characters").append(goatImg);
-    var davidImg = $("<img>");
-    davidImg.attr("src", characters[3].image_url);
-    davidImg.attr("class", "unchosen")
-    davidImg.attr("alive", "true");
-    davidImg.attr("enemy", "true");
-    davidImg.attr("opponent", "false");
-    davidImg.attr("index", "3");
-    $("#characters").append(davidImg);
+    var goatDiv = $("<div>");
+    goatDiv.addClass("characters");
+    goatDiv.addClass("goat");
+    goatDiv.addClass("unchosen");
+    goatDiv.attr("alive", "true");
+    goatDiv.attr("enemy", "true");
+    goatDiv.attr("opponent", "false");
+    goatDiv.attr("index", "0");
+    var goatTitle = $("<p>");
+    goatTitle.attr("id", "goat-title");
+    var goatPic = $("<img>");
+    goatPic.attr("src", characters[2].image_url);
+    var goatHealth = $("<p>");
+    goatHealth.attr("id", "goat-health");
+    $("#characters").append(goatDiv);
+    $(".goat").append(goatTitle);
+    $("#goat-title").text(characters[2].title);
+    $(".goat").append(goatPic);
+    $(".goat").append(goatHealth);
+    $("#goat-health").text(characters[2].health);
+
+    var davidDiv = $("<div>");
+    davidDiv.addClass("characters");
+    davidDiv.addClass("david");
+    davidDiv.addClass("unchosen");
+    davidDiv.attr("alive", "true");
+    davidDiv.attr("enemy", "true");
+    davidDiv.attr("opponent", "false");
+    davidDiv.attr("index", "0");
+    var davidTitle = $("<p>");
+    davidTitle.attr("id", "david-title");
+    var davidPic = $("<img>");
+    davidPic.attr("src", characters[3].image_url);
+    var davidHealth = $("<p>");
+    davidHealth.attr("id", "david-health");
+    $("#characters").append(davidDiv);
+    $(".david").append(davidTitle);
+    $("#david-title").text(characters[3].title);
+    $(".david").append(davidPic);
+    $(".david").append(davidHealth);
+    $("#david-health").text(characters[3].health);
 
     $(".unchosen").on("click", function() {
         $(this).attr("enemy", "false");
@@ -104,46 +133,46 @@ var characters = [
             userIndex = parseInt($(this).attr("index"));
         }
         $("#me").append(this);
-            if (koalaImg.attr("enemy") === "true") {
-                koalaImg.attr("class", "enemy");
-                $("#enemies").append(koalaImg);
+            if (koalaDiv.attr("enemy") === "true") {
+                koalaDiv.addClass("enemy");
+                $("#enemies").append(koalaDiv);
             } 
-            if (foxImg.attr("enemy") === "true") {
-                foxImg.attr("class", "enemy");
-                $("#enemies").append(foxImg);
+            if (foxDiv.attr("enemy") === "true") {
+                foxDiv.addClass("enemy");
+                $("#enemies").append(foxDiv);
             } 
-            if (goatImg.attr("enemy") === "true") {
-                goatImg.attr("class", "enemy");
-                $("#enemies").append(goatImg);
+            if (goatDiv.attr("enemy") === "true") {
+                goatDiv.addClass("enemy");
+                $("#enemies").append(goatDiv);
             } 
-            if (davidImg.attr("enemy") === "true") {
-                davidImg.attr("class", "enemy");
-                $("#enemies").append(davidImg);
+            if (davidDiv.attr("enemy") === "true") {
+                davidDiv.addClass("enemy");
+                $("#enemies").append(davidDiv);
             } 
     });
 
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
         opponentIndex = parseInt($(this).attr("index"));
-        if (koalaImg.attr("opponent") === "true") {
-            koalaImg.attr("class", "opponent");
-            $("#opponent").append(koalaImg);
-            koalaImg.attr("opponent", "false")
+        if (koalaDiv.attr("opponent") === "true") {
+            koalaDiv.addClass("opponent");
+            $("#opponent").append(koalaDiv);
+            koalaDiv.attr("opponent", "false")
         } 
-        if (foxImg.attr("opponent") === "true") {
-            foxImg.attr("class", "opponent");
-            $("#opponent").append(foxImg);
-            foxImg.attr("opponent", "false")
+        if (foxDiv.attr("opponent") === "true") {
+            foxDiv.addClass("opponent");
+            $("#opponent").append(foxDiv);
+            foxDiv.attr("opponent", "false")
         } 
-        if (goatImg.attr("opponent") === "true") {
-            goatImg.attr("class", "opponent");
-            $("#opponent").append(goatImg);
-            goatImg.attr("opponent", "false")
+        if (goatDiv.attr("opponent") === "true") {
+            goatDiv.addClass("opponent");
+            $("#opponent").append(goatDiv);
+            goatDiv.attr("opponent", "false")
         } 
-        if (davidImg.attr("opponent") === "true") {
-            davidImg.attr("class", "opponent");
-            $("#opponent").append(davidImg);
-            davidImg.attr("opponent", "false")
+        if (davidDiv.attr("opponent") === "true") {
+            davidDiv.addClass("opponent");
+            $("#opponent").append(davidDiv);
+            davidDiv.attr("opponent", "false")
         } 
     });
 
