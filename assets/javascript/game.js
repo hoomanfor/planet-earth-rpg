@@ -6,28 +6,28 @@ $(document).ready(function() {
 
 var characters = [
     {
-        title: "koala",
+        title: "Koala",
         health: 120,
         attack: 20,
         counter: 5,
         image_url: "assets/images/koala.jpg"
     },
     {
-        title: "fox",
+        title: "Fox",
         health: 125,
         attack: 15,
         counter: 15,
         image_url: "assets/images/fox.jpg"
     },
     {
-        title: "goat",
+        title: "Goat",
         health: 115,
         attack: 10,
         counter: 25,
         image_url: "assets/images/goat.jpg"
     },
     {
-        title: "david",
+        title: "David",
         health: 105,
         attack: 5,
         counter: 10,
@@ -45,6 +45,8 @@ var characters = [
     var userHealthId;
     var opponentHealthId;
     var opponentsDefeated = 0; 
+    var opponentSelected = true;
+    var newGame = true; 
 
     var koalaDiv = $("<div>");
     koalaDiv.addClass("characters");
@@ -135,53 +137,61 @@ var characters = [
         if (userIndex === "") {
             userIndex = parseInt($(this).attr("index"));
         }
+        if (newGame == true) {
         $("#me").append(this);
             if (koalaDiv.attr("enemy") === "true") {
                 koalaDiv.addClass("enemy");
                 $("#enemies").append(koalaDiv);
+                newGame = false;
             } 
             if (foxDiv.attr("enemy") === "true") {
                 foxDiv.addClass("enemy");
                 $("#enemies").append(foxDiv);
+                newGame = false;
             } 
             if (goatDiv.attr("enemy") === "true") {
                 goatDiv.addClass("enemy");
                 $("#enemies").append(goatDiv);
+                newGame = false;
             } 
             if (davidDiv.attr("enemy") === "true") {
                 davidDiv.addClass("enemy");
                 $("#enemies").append(davidDiv);
+                newGame = false;
             } 
+        }
     });
 
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
         opponentIndex = parseInt($(this).attr("index"));
-        if (koalaDiv.attr("opponent") === "true") {
+        if (koalaDiv.attr("opponent") === "true" && opponentSelected == true) {
             koalaDiv.addClass("opponent");
             $("#opponent").append(koalaDiv);
             koalaDiv.attr("opponent", "false")
+            opponentSelected = false;
         } 
-        if (foxDiv.attr("opponent") === "true") {
+        if (foxDiv.attr("opponent") === "true" && opponentSelected == true) {
             foxDiv.addClass("opponent");
             $("#opponent").append(foxDiv);
             foxDiv.attr("opponent", "false")
+            opponentSelected = false;
         } 
-        if (goatDiv.attr("opponent") === "true") {
+        if (goatDiv.attr("opponent") === "true" && opponentSelected == true) {
             goatDiv.addClass("opponent");
             $("#opponent").append(goatDiv);
             goatDiv.attr("opponent", "false")
+            opponentSelected = false;
         } 
-        if (davidDiv.attr("opponent") === "true") {
+        if (davidDiv.attr("opponent") === "true" && opponentSelected == true) {
             davidDiv.addClass("opponent");
             $("#opponent").append(davidDiv);
             davidDiv.attr("opponent", "false")
+            opponentSelected = false;
         } 
     });
 
     $("button").click(function() {
-        // console.log("userIndex: " , userIndex);
-        // console.log("opponentIndex: ", opponentIndex);
 
         userHealthId = "#health" + userIndex;
         opponentHealthId = "#health" + opponentIndex;
@@ -192,23 +202,29 @@ var characters = [
             opponentCurrentHealth = characters[opponentIndex].health;
             opponentCounter = characters[opponentIndex].counter
         }
+
         if (initialized === false && opponentsDefeated >= 1) {
             opponentCurrentHealth = characters[opponentIndex].health;
             opponentCounter = characters[opponentIndex].counter
         }
-        userCurrentHealth = userCurrentHealth - opponentCounter;
-            $(userHealthId).text(userCurrentHealth);
-        opponentCurrentHealth = opponentCurrentHealth - userAttack;
-            console.log("userAttack: ", userAttack);
-            $(opponentHealthId).text(opponentCurrentHealth);
-        userAttack = userAttack + characters[userIndex].attack
-            console.log("userAttack (power-up): ", userAttack);
-        initialized = true; 
+
+            userCurrentHealth = userCurrentHealth - opponentCounter;
+                $(userHealthId).text(userCurrentHealth);
+
+            opponentCurrentHealth = opponentCurrentHealth - userAttack;
+                console.log("userAttack: ", userAttack);
+                $(opponentHealthId).text(opponentCurrentHealth);
+
+            userAttack = userAttack + characters[userIndex].attack
+                console.log("userAttack (power-up): ", userAttack);
+                initialized = true; 
+
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
             opponentsDefeated++;
             console.log(opponentsDefeated);
             initialized = false; 
+            opponentSelected = true; 
         }
     });
 });
