@@ -164,26 +164,30 @@ var characters = [
 
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
-        opponentIndex = parseInt($(this).attr("index"));
+        // opponentIndex = parseInt($(this).attr("index"));
         if (koalaDiv.attr("opponent") === "true" && opponentSelected == true) {
+            opponentIndex = parseInt($(this).attr("index"));
             koalaDiv.addClass("opponent");
             $("#opponent").append(koalaDiv);
             koalaDiv.attr("opponent", "false")
             opponentSelected = false;
         } 
         if (foxDiv.attr("opponent") === "true" && opponentSelected == true) {
+            opponentIndex = parseInt($(this).attr("index"));
             foxDiv.addClass("opponent");
             $("#opponent").append(foxDiv);
             foxDiv.attr("opponent", "false")
             opponentSelected = false;
         } 
         if (goatDiv.attr("opponent") === "true" && opponentSelected == true) {
+            opponentIndex = parseInt($(this).attr("index"));
             goatDiv.addClass("opponent");
             $("#opponent").append(goatDiv);
             goatDiv.attr("opponent", "false")
             opponentSelected = false;
         } 
         if (davidDiv.attr("opponent") === "true" && opponentSelected == true) {
+            opponentIndex = parseInt($(this).attr("index"));
             davidDiv.addClass("opponent");
             $("#opponent").append(davidDiv);
             davidDiv.attr("opponent", "false")
