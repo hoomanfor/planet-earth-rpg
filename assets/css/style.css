@@ -6,23 +6,62 @@ body {
     font-size: 16px; 
 }
 
+header {
+    width: 960px;
+    margin: auto; 
+}
+
 h1 {
-    font-size: 20px; 
-    clear:both; 
+    text-align: center; 
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 30px; 
+}
+
+.subtitle {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 16px; 
+    color: green; 
+    letter-spacing: 5px; 
+}
+
+main {
+    /* border: 1px solid black;  */
+    width: 960px;
+    margin: auto;
+
+}
+
+.container {
+    /* border: 1px solid black;  */
+    margin: 10px 0 0 166px; 
+}
+
+h2 {
+    clear:both;
+    font-family: 'Lexend Mega', sans-serif;
+
 }
 
 .characters {
     border: 1px solid black; 
-    /* display: inline-block;  */
     float: left; 
     padding: 5px 15px; 
     text-align: center; 
 }
 
-.bg-color {
+.unchosen {
     background-color: green;
 }
 
-button {
-    font-size: 16px; 
+.enemy {
+    background-color: red; 
 }
+
+.opponent {
+    background-color: orange; 
+}
+
+/* Google Fonts
+font-family: 'Lexend Mega', sans-serif;
+font-family: 'Fira Sans Extra Condensed', sans-serif;
+font-family: 'Alfa Slab One', cursive; */

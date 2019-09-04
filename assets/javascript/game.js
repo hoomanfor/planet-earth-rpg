@@ -226,9 +226,13 @@ var characters = [
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
             opponentsDefeated++;
-            console.log(opponentsDefeated);
             initialized = false; 
             opponentSelected = true; 
+        }
+
+        if (userCurrentHealth <= 0) {
+            // $("#me").remove();
+            alert("You've been defeated! Try Again :-D")
         }
     });
 });
