@@ -44,6 +44,7 @@ var characters = [
     var initialized = false;
     var userHealthId;
     var opponentHealthId;
+    var opponentsDefeated = 0; 
 
     var koalaDiv = $("<div>");
     koalaDiv.addClass("characters");
@@ -178,46 +179,38 @@ var characters = [
         } 
     });
 
-    //(bug) User's health resets to original health power
     $("button").click(function() {
-        console.log("userIndex: " , userIndex);
+        // console.log("userIndex: " , userIndex);
+        // console.log("opponentIndex: ", opponentIndex);
+
         userHealthId = "#health" + userIndex;
-        console.log("userHealthId: ", userHealthId);
-
-        console.log("opponentIndex: ", opponentIndex);
         opponentHealthId = "#health" + opponentIndex;
-        console.log("opponentHealthId: ", opponentHealthId);
 
-        if (!initialized) {
+        if (initialized === false && opponentsDefeated === 0) {
             userCurrentHealth = characters[userIndex].health;
             userAttack = characters[userIndex].attack; 
             opponentCurrentHealth = characters[opponentIndex].health;
             opponentCounter = characters[opponentIndex].counter
-
+        }
+        if (initialized === false && opponentsDefeated >= 1) {
+            opponentCurrentHealth = characters[opponentIndex].health;
+            opponentCounter = characters[opponentIndex].counter
         }
         userCurrentHealth = userCurrentHealth - opponentCounter;
             $(userHealthId).text(userCurrentHealth);
         opponentCurrentHealth = opponentCurrentHealth - userAttack;
+            console.log("userAttack: ", userAttack);
             $(opponentHealthId).text(opponentCurrentHealth);
-        console.log("userAttack(pre-power-up): ", userAttack);
         userAttack = userAttack + characters[userIndex].attack
+            console.log("userAttack (power-up): ", userAttack);
         initialized = true; 
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
+            opponentsDefeated++;
+            console.log(opponentsDefeated);
             initialized = false; 
         }
-        
-        console.log("userCurrentHealth: ", userCurrentHealth);
-        console.log("opponentCurrentHealth: ", opponentCurrentHealth);
-        console.log("userAttack(post-power-up): ", userAttack);
     });
-
-
-
-    // for (var key in characters) {
-    //     console.log(characters[key].title);
-    // }
-
 });
 
 // You are able to pick a Character to fight with against Enemy characters
@@ -261,4 +254,8 @@ var characters = [
         //     var healthP = $("<p>");
         //     healthP.text(characters[i].health);
         //     $(characterId).append(healthP);
+        // }
+
+        // for (var key in characters) {
+        //  console.log(characters[key].title);
         // }
