@@ -39,7 +39,6 @@ main {
 h2 {
     clear:both;
     font-family: 'Lexend Mega', sans-serif;
-
 }
 
 .characters {
@@ -60,6 +59,37 @@ h2 {
 .opponent {
     background-color: orange; 
 }
+
+.arena {
+    clear: both;
+    margin: 0 0 0 76px; 
+}
+
+.button-div {
+    float: left;
+}
+
+button {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-size: 20px;
+    margin: 16px 0 0 0;
+    padding: 25px 50px; 
+    width: 157px; 
+    height: 147px; 
+}
+
+.me-div,
+.opponent-div {
+    float:left; 
+}
+
+.me-header,
+.opponent-header {
+    text-align: center; 
+}
+
+
+
 
 /* Google Fonts
 font-family: 'Lexend Mega', sans-serif;

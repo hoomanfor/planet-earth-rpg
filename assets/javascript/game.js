@@ -133,12 +133,21 @@ var characters = [
     $("#health3").text(characters[3].health);
 
     $(".unchosen").on("click", function() {
+        $("#pick-character-header").remove();
+        $("#enemies-header").text("Enemies Available to Attack")
         $(this).attr("enemy", "false");
         if (userIndex === "") {
             userIndex = parseInt($(this).attr("index"));
         }
         if (newGame == true) {
         $("#me").append(this);
+        $("#me-header").text("Me");
+        var buttonDiv = $("<button>");
+        buttonDiv.attr("type", "button");
+        buttonDiv.addClass("attack-button");
+        buttonDiv.attr("id", "attack");
+        buttonDiv.text("Attack!")
+        $("#button-div").append(buttonDiv);
             if (koalaDiv.attr("enemy") === "true") {
                 koalaDiv.addClass("enemy");
                 $("#enemies").append(koalaDiv);
@@ -164,7 +173,7 @@ var characters = [
 
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
-        // opponentIndex = parseInt($(this).attr("index"));
+        $("#opponent-header").text("Opponent");
         if (koalaDiv.attr("opponent") === "true" && opponentSelected == true) {
             opponentIndex = parseInt($(this).attr("index"));
             koalaDiv.addClass("opponent");
@@ -195,7 +204,7 @@ var characters = [
         } 
     });
 
-    $("button").click(function() {
+    $(document).on("click", "button", function() {
 
         userHealthId = "#health" + userIndex;
         opponentHealthId = "#health" + opponentIndex;
@@ -225,6 +234,7 @@ var characters = [
 
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
+            $("#opponent-header").text("");
             opponentsDefeated++;
             initialized = false; 
             opponentSelected = true; 
