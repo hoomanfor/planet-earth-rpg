@@ -48,6 +48,10 @@ h2 {
     text-align: center; 
 }
 
+.characters:hover {
+    cursor: pointer;
+}
+
 .unchosen {
     background-color: green;
 }
@@ -78,6 +82,10 @@ button {
     height: 147px; 
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .me-div,
 .opponent-div {
     float:left; 
@@ -87,9 +95,6 @@ button {
 .opponent-header {
     text-align: center; 
 }
-
-
-
 
 /* Google Fonts
 font-family: 'Lexend Mega', sans-serif;

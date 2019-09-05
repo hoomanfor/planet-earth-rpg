@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-// First, I need to create an array of objects
-// Each Object will have the following the following properties:
-// title, health, attack, counter, image
-
 var characters = [
     {
         title: "Koala",
@@ -224,13 +220,13 @@ var characters = [
             userCurrentHealth = userCurrentHealth - opponentCounter;
                 $(userHealthId).text(userCurrentHealth);
 
-            opponentCurrentHealth = opponentCurrentHealth - userAttack;
-                console.log("userAttack: ", userAttack);
-                $(opponentHealthId).text(opponentCurrentHealth);
+                opponentCurrentHealth = opponentCurrentHealth - userAttack;
+                    console.log("userAttack: ", userAttack);
+                    $(opponentHealthId).text(opponentCurrentHealth);
 
-            userAttack = userAttack + characters[userIndex].attack
-                console.log("userAttack (power-up): ", userAttack);
-                initialized = true; 
+                userAttack = userAttack + characters[userIndex].attack
+                    console.log("userAttack (power-up): ", userAttack);
+                    initialized = true; 
 
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
@@ -244,52 +240,28 @@ var characters = [
             // $("#me").remove();
             alert("You've been defeated! Try Again :-D")
         }
+
     });
 });
 
-// You are able to pick a Character to fight with against Enemy characters
-// At the beginning of the game, there are 4 characters you choose from. 
+// 9-5-2019 - What remains to be done?
+// Notifications for when I attack a character
+// Example: You attacked Fox for 24 damage.
+//          David attacked you back for 25 damage. 
 
-// There are 4 main areas on the page.
-// Your Character, Enemies Available to Attack, Fight Section (attack button), Defender Section
+// Notifications
+// If I defeat an opponent, I should see a notification.
+// For example, "You have defeated Koala, you can choose to fight another enemy."
 
-// When I choose my character, the three remaining characters drop down to the "Enemies Available to Attack Section.
+// Notifications
+// If I click the "Attack!" button without an opponent selected, I should get
+// the following notification: "No opponent selected! Choose an enemy"
 
-// From there, I need to choose one of these remaining characters to fight first.
+// Notifications for when I am defeated or win
+// Example: You've been defeated...Game OVER!!!
+// Example: You won!
 
-// When I choose one, that character drops down to the Defender section.
+// A "Reset" button for when I Win or Lose. Resetting the game into a new game. 
 
-// Each character in the game has 3 attributes: `Health Points`, `Attack Power` and `Counter Attack Power`.
 
-// For example, if the base Attack Power is 6, each attack will increase the Attack Power by 6 (12, 18, 24, 30 and so on).
 
-// Unlike the player's `Attack Points`, `Counter Attack Power` never changes.
-
-// The `Health Points`, `Attack Power` and `Counter Attack Power` of each character must differ.
-
-// A winning player must pick their characters wisely by first fighting an enemy with low `Counter Attack Power`. This will allow them to grind `Attack Power` and to take on enemies before they lose all of their `Health Points`. Healing options would mess with this dynamic.
-
-// Your players should be able to win and lose the game no matter what character they choose. The challenge should come from picking the right enemies, not choosing the strongest player.
-
-        // for (var i = 0; i < characters.length; i++) {
-        //     var characterDiv = $("<div>");
-        //     characterDiv.attr("class", "characters");
-        //     characterDiv.attr("id", characters[i].title)
-        //     var characterId = "#" + characters[i].title
-        //     $("#characters").append(characterDiv);
-        //     var titleP = $("<p>");
-        //     titleP.text(characters[i].title);
-        //     $(characterId).append(titleP)
-        //     var characterImg = $("<img>");
-        //     characterImg.attr("src", characters[i].image_url);
-        //     characterImg.attr("width", "150px");
-        //     characterImg.attr("height", "125px");
-        //     $(characterId).append(characterImg);
-        //     var healthP = $("<p>");
-        //     healthP.text(characters[i].health);
-        //     $(characterId).append(healthP);
-        // }
-
-        // for (var key in characters) {
-        //  console.log(characters[key].title);
-        // }
