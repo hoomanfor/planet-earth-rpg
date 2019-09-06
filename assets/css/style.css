@@ -33,7 +33,7 @@ main {
 
 .container {
     /* border: 1px solid black;  */
-    margin: 10px 0 0 166px; 
+    margin: 10px 0 0 0; 
 }
 
 h2 {
@@ -66,24 +66,27 @@ h2 {
 
 .arena {
     clear: both;
-    margin: 0 0 0 76px; 
+    margin: 0 0 0 0; 
 }
 
 .button-div {
     float: left;
+    margin: 16px 0 0 0;
+    padding: 50px; 
 }
 
 button {
     font-family: 'Fira Sans Extra Condensed', sans-serif;
     font-size: 20px;
-    margin: 16px 0 0 0;
-    padding: 25px 50px; 
-    width: 157px; 
-    height: 147px; 
+
 }
 
 button:hover {
     cursor: pointer;
+}
+
+.vs-text {
+    text-align: center; 
 }
 
 .me-div,
@@ -94,6 +97,11 @@ button:hover {
 .me-header,
 .opponent-header {
     text-align: center; 
+}
+
+.notifications {
+    clear: both; 
+    /* text-align: center;  */
 }
 
 /* Google Fonts

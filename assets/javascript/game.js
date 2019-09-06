@@ -42,7 +42,9 @@ var characters = [
     var opponentHealthId;
     var opponentsDefeated = 0; 
     var opponentSelected = true;
-    var newGame = true; 
+    var newGame = true;
+    var userTitle = "";
+    var opponentTitle = "";
 
     var koalaDiv = $("<div>");
     koalaDiv.addClass("characters");
@@ -143,6 +145,10 @@ var characters = [
         buttonDiv.addClass("attack-button");
         buttonDiv.attr("id", "attack");
         buttonDiv.text("Attack!")
+        var vsP = $("<p>");
+        vsP.addClass("vs-text");
+        vsP.text("Vs.");
+        $("#button-div").append(vsP);
         $("#button-div").append(buttonDiv);
             if (koalaDiv.attr("enemy") === "true") {
                 koalaDiv.addClass("enemy");
@@ -204,6 +210,12 @@ var characters = [
 
         userHealthId = "#health" + userIndex;
         opponentHealthId = "#health" + opponentIndex;
+        console.log("userIndex & opponentIndex: ", userIndex, " - ", opponentIndex)
+        userTitle = characters[userIndex].title;
+        opponentTitle = characters[opponentIndex].title;
+        console.log("userTitle & opponentTitle: ", userTitle, " - ", opponentTitle)
+        var notificationP = $("<p>");
+        
 
         if (initialized === false && opponentsDefeated === 0) {
             userCurrentHealth = characters[userIndex].health;
@@ -217,20 +229,27 @@ var characters = [
             opponentCounter = characters[opponentIndex].counter
         }
 
-            userCurrentHealth = userCurrentHealth - opponentCounter;
-                $(userHealthId).text(userCurrentHealth);
 
                 opponentCurrentHealth = opponentCurrentHealth - userAttack;
                     console.log("userAttack: ", userAttack);
                     $(opponentHealthId).text(opponentCurrentHealth);
 
+                if (opponentCurrentHealth > 0) {
+                    userCurrentHealth = userCurrentHealth - opponentCounter;
+                        $(userHealthId).text(userCurrentHealth);
+                }
+        
+                $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + opponentTitle + " attacked you back for " + opponentCounter + " damage.");
+
                 userAttack = userAttack + characters[userIndex].attack
                     console.log("userAttack (power-up): ", userAttack);
                     initialized = true; 
 
+
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
             $("#opponent-header").text("");
+            $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + "You have defeated " + opponentTitle + ".");
             opponentsDefeated++;
             initialized = false; 
             opponentSelected = true; 
