@@ -41,7 +41,7 @@ var characters = [
     var userHealthId;
     var opponentHealthId;
     var opponentsDefeated = 0; 
-    var opponentSelected = true;
+    var opponentSelected = false;
     var newGame = true;
     var userTitle = "";
     var opponentTitle = "";
@@ -138,8 +138,10 @@ var characters = [
             userIndex = parseInt($(this).attr("index"));
         }
         if (newGame == true) {
+
         $("#me").append(this);
         $("#me-header").text("Me");
+
         var buttonDiv = $("<button>");
         buttonDiv.attr("type", "button");
         buttonDiv.addClass("attack-button");
@@ -150,6 +152,11 @@ var characters = [
         vsP.text("Vs.");
         $("#button-div").append(vsP);
         $("#button-div").append(buttonDiv);
+        var placeholderP = $("<p>");
+
+        $("#opponent-header").text("Opponent");
+        $("#opponent").text("?");
+
             if (koalaDiv.attr("enemy") === "true") {
                 koalaDiv.addClass("enemy");
                 $("#enemies").append(koalaDiv);
@@ -176,37 +183,43 @@ var characters = [
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
         $("#opponent-header").text("Opponent");
-        if (koalaDiv.attr("opponent") === "true" && opponentSelected == true) {
+        if (koalaDiv.attr("opponent") === "true" && opponentSelected == false) {
+            $("#notifications").text("This is combat. You must attack!");
             opponentIndex = parseInt($(this).attr("index"));
             koalaDiv.addClass("opponent");
-            $("#opponent").append(koalaDiv);
+            $("#opponent").html(koalaDiv);
             koalaDiv.attr("opponent", "false")
-            opponentSelected = false;
+            opponentSelected = true;
         } 
-        if (foxDiv.attr("opponent") === "true" && opponentSelected == true) {
+        if (foxDiv.attr("opponent") === "true" && opponentSelected == false) {
+            $("#notifications").text("This is combat. You must attack!");
             opponentIndex = parseInt($(this).attr("index"));
             foxDiv.addClass("opponent");
-            $("#opponent").append(foxDiv);
+            $("#opponent").html(foxDiv);
             foxDiv.attr("opponent", "false")
-            opponentSelected = false;
+            opponentSelected = true;
         } 
-        if (goatDiv.attr("opponent") === "true" && opponentSelected == true) {
+        if (goatDiv.attr("opponent") === "true" && opponentSelected == false) {
+            $("#notifications").text("This is combat. You must attack!");
             opponentIndex = parseInt($(this).attr("index"));
             goatDiv.addClass("opponent");
-            $("#opponent").append(goatDiv);
+            $("#opponent").html(goatDiv);
             goatDiv.attr("opponent", "false")
-            opponentSelected = false;
+            opponentSelected = true;
         } 
-        if (davidDiv.attr("opponent") === "true" && opponentSelected == true) {
+        if (davidDiv.attr("opponent") === "true" && opponentSelected == false) {
+            $("#notifications").text("This is combat. You must attack!");
             opponentIndex = parseInt($(this).attr("index"));
             davidDiv.addClass("opponent");
-            $("#opponent").append(davidDiv);
+            $("#opponent").html(davidDiv);
             davidDiv.attr("opponent", "false")
-            opponentSelected = false;
+            opponentSelected = true;
         } 
     });
 
     $(document).on("click", "button", function() {
+        $("#notifications").text("You must select an opponent prior to attack!");
+        if (opponentSelected == true) {
 
         userHealthId = "#health" + userIndex;
         opponentHealthId = "#health" + opponentIndex;
@@ -249,18 +262,27 @@ var characters = [
         if (opponentCurrentHealth <= 0) {
             $(".opponent").remove();
             $("#opponent-header").text("");
-            $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + "You have defeated " + opponentTitle + ".");
+            $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + "As a result, you have defeated " + opponentTitle + ".");
             opponentsDefeated++;
             initialized = false; 
-            opponentSelected = true; 
+            opponentSelected = false; 
+            if (opponentsDefeated < 3) {
+                $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + "As a result, you have defeated " + opponentTitle + "." + "<br>" + "Choose a new opponent!");
+            }
+            if (opponentsDefeated == 3) {
+                $("#notifications").html("You have defeated the final foe. " + "<br>" + "You are the champion planet Earth!");
+            }
         }
 
         if (userCurrentHealth <= 0) {
-            // $("#me").remove();
-            alert("You've been defeated! Try Again :-D")
+            $("#notifications").text("You've been defeated by " + opponentTitle + ".");
+        }
+
         }
 
     });
+
+    
 });
 
 // 9-5-2019 - What remains to be done?

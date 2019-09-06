@@ -46,6 +46,9 @@ h2 {
     float: left; 
     padding: 5px 15px; 
     text-align: center; 
+    font-family: 'Lexend Mega', sans-serif;
+    /* font-family: 'Fira Sans Extra Condensed', sans-serif; */
+    /* font-family: 'Alfa Slab One', cursive; */
 }
 
 .characters:hover {
