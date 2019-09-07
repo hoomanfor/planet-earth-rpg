@@ -132,7 +132,7 @@ var characters = [
 
     $(".unchosen").on("click", function() {
         $("#pick-character-header").remove();
-        $("#enemies-header").text("Enemies Available to Attack")
+        $("#enemies-header").text("Below, you will find enemies. Choose an opponent!")
         $(this).attr("enemy", "false");
         if (userIndex === "") {
             userIndex = parseInt($(this).attr("index"));
@@ -140,7 +140,7 @@ var characters = [
         if (newGame == true) {
 
         $("#me").append(this);
-        $("#me-header").text("Me");
+        $("#me-header").text("I am");
 
         var buttonDiv = $("<button>");
         buttonDiv.attr("type", "button");
@@ -152,10 +152,15 @@ var characters = [
         vsP.text("Vs.");
         $("#button-div").append(vsP);
         $("#button-div").append(buttonDiv);
-        var placeholderP = $("<p>");
+
 
         $("#opponent-header").text("Opponent");
-        $("#opponent").text("?");
+        var placeholderImg = $("<img>")
+        placeholderImg.attr("src", "assets/images/placeholder.jpg");
+        placeholderImg.css("margin", "5px 0")
+        placeholderImg.css("border-radius", "5%");
+        placeholderImg.css("border", "2px solid black");
+        $("#opponent").html(placeholderImg);
 
             if (koalaDiv.attr("enemy") === "true") {
                 koalaDiv.addClass("enemy");
@@ -183,6 +188,7 @@ var characters = [
     $(document).on("click", ".enemy", function() {
         $(this).attr("opponent", "true")
         $("#opponent-header").text("Opponent");
+        $("#enemies-header").text("");
         if (koalaDiv.attr("opponent") === "true" && opponentSelected == false) {
             $("#notifications").text("This is combat. You must attack!");
             opponentIndex = parseInt($(this).attr("index"));
@@ -219,6 +225,7 @@ var characters = [
 
     $(document).on("click", "button", function() {
         $("#notifications").text("You must select an opponent prior to attack!");
+        $("#enemies-header").text("");
         if (opponentSelected == true) {
 
         userHealthId = "#health" + userIndex;
@@ -270,7 +277,7 @@ var characters = [
                 $("#notifications").html("You attacked " + opponentTitle + " for " + userAttack + " damage. " + "<br>" + "As a result, you have defeated " + opponentTitle + "." + "<br>" + "Choose a new opponent!");
             }
             if (opponentsDefeated == 3) {
-                $("#notifications").html("You have defeated the final foe. " + "<br>" + "You are the champion planet Earth!");
+                $("#notifications").html("You have defeated the final foe. " + "<br>" + "You are the champion of planet Earth!");
             }
         }
 
