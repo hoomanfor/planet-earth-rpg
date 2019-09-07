@@ -85,13 +85,18 @@ h2 {
 button {
     font-family: 'Fira Sans Extra Condensed', sans-serif;
     font-size: 20px;
-
 }
 
 button:hover {
     cursor: pointer;
 }
 
+.reset-button {
+    margin: 5px 0 0 72px; 
+    font-size: 24px; 
+}
+
+.reset-text,
 .vs-text {
     text-align: center; 
     font-family: 'Lexend Mega', sans-serif;

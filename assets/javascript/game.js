@@ -5,31 +5,33 @@ var characters = [
         title: "Koala",
         health: 120,
         attack: 20,
-        counter: 5,
+        counter: 25,
         image_url: "assets/images/koala.jpg"
     },
     {
         title: "Fox",
         health: 125,
         attack: 15,
-        counter: 15,
+        counter: 30,
         image_url: "assets/images/fox.jpg"
     },
     {
         title: "Goat",
         health: 115,
         attack: 10,
-        counter: 25,
+        counter: 35,
         image_url: "assets/images/goat.jpg"
     },
     {
         title: "David",
         health: 105,
         attack: 5,
-        counter: 10,
+        counter: 25,
         image_url: "assets/images/david.jpg"
     }
 ];
+
+function newGame() {
         
     var userIndex = "";
     var opponentIndex;
@@ -142,16 +144,15 @@ var characters = [
         $("#me").append(this);
         $("#me-header").text("I am");
 
-        var buttonDiv = $("<button>");
-        buttonDiv.attr("type", "button");
-        buttonDiv.addClass("attack-button");
-        buttonDiv.attr("id", "attack");
-        buttonDiv.text("Attack!")
+        var attackBtn = $("<button>");
+        attackBtn.attr("type", "button");
+        attackBtn.addClass("attack-button");
+        attackBtn.text("Attack!")
         var vsP = $("<p>");
         vsP.addClass("vs-text");
         vsP.text("Vs.");
-        $("#button-div").append(vsP);
-        $("#button-div").append(buttonDiv);
+        $("#attack-btn").append(vsP);
+        $("#attack-btn").append(attackBtn);
 
 
         $("#opponent-header").text("Opponent");
@@ -223,7 +224,7 @@ var characters = [
         } 
     });
 
-    $(document).on("click", "button", function() {
+    $(document).on("click", ".attack-button", function() {
         $("#notifications").text("You must select an opponent prior to attack!");
         $("#enemies-header").text("");
         if (opponentSelected == true) {
@@ -278,14 +279,56 @@ var characters = [
             }
             if (opponentsDefeated == 3) {
                 $("#notifications").html("You have defeated the final foe. " + "<br>" + "You are the champion of planet Earth!");
+
+                $("#attack-btn").html("");
+                var resetBtn = $("<button>");
+                resetBtn.attr("type", "button");
+                resetBtn.addClass("reset-button");
+                resetBtn.text("Reset")
+                var playAgainP = $("<p>");
+                playAgainP.addClass("reset-text");
+                playAgainP.text("Play again?");
+                $("#attack-btn").append(playAgainP);
+                $("#attack-btn").append(resetBtn);
+
             }
         }
 
         if (userCurrentHealth <= 0) {
             $("#notifications").text("You've been defeated by " + opponentTitle + ".");
+
+            $("#attack-btn").html("");
+            var resetBtn = $("<button>");
+            resetBtn.attr("type", "button");
+            resetBtn.addClass("reset-button");
+            resetBtn.text("Reset")
+            var playAgainP = $("<p>");
+            playAgainP.addClass("reset-text");
+            playAgainP.text("Play again?");
+            $("#attack-btn").append(playAgainP);
+            $("#attack-btn").append(resetBtn);
         }
 
         }
+    });
+
+}
+
+    newGame();
+
+    $(document).on("click", ".reset-button", function() {
+
+        $("#characters").html("");
+        $("#me-header").html("");
+        $("#me").html("");
+        $("#attack-btn").html("");
+        $("#opponent-header").html("");
+        $("#opponent").html("");
+        $("#notifications").html("");
+        $("#enemies-header").html("");
+        $("#enemies").html("");
+
+        newGame();
 
     });
 
